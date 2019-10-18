@@ -13,7 +13,7 @@ const (
 	hashSize = 32
 	blobSize = 32
 	coinName = "CPEN 442 Coin2019"
-	hashPref = "000000"
+	hashPref = "00000000"
 )
 
 var (
