@@ -59,8 +59,3 @@ func Mine(prev, id string) (*Coin, error) {
 	}
 	return c, nil
 }
-
-func tryBlob(prev, blob, minerID string) string {
-	data := []byte(fmt.Sprintf("%s%s%s%s", coinName, prev, blob, minerID))
-	return fmt.Sprintf("%x", md5.Sum(data))
-}

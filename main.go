@@ -19,9 +19,6 @@ func init() {
 }
 
 func main() {
-	// blob, _ := base64.StdEncoding.DecodeString(found)
-	// fmt.Println(tryBlob(prev, string(blob), id))
-
 	c, err := Mine(prev, id)
 	if err != nil {
 		log.Fatal(err)
