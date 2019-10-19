@@ -19,7 +19,7 @@ func init() {
 }
 
 func main() {
-	// blob, _ := base64.StdEncoding.DecodeString(try)
+	// blob, _ := base64.StdEncoding.DecodeString(found)
 	// fmt.Println(tryBlob(prev, string(blob), id))
 
 	c, err := Mine(prev, id)
