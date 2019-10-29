@@ -9,19 +9,35 @@ import (
 )
 
 const (
-	prev  = "2e3a8e88a060cedcd9ac7b74fadd58e0"
-	id    = "110b3259f9f189e603ad4142660d6945"
-	found = "T2JEe2cYC7HC5DMrgmmKiiUnG9XDAuEyW9YftTNyWWU="
+	id = "110b3259f9f189e603ad4142660d6945"
 )
 
-func init() {
-	rand.Seed(time.Now().UTC().UnixNano())
-}
-
 func main() {
-	c, err := Mine(prev, id)
+	client, err := NewClient("http://cpen442coin.ece.ubc.ca")
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	last, err := client.LastCoin()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("fetched last coin hash from API: %s\n", last) 
+	fmt.Println("mining...")
+
+	rand.Seed(time.Now().UTC().UnixNano())
+	c, err := Mine(last, id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	fmt.Printf("mined coin with blob base64: %s\n", base64.StdEncoding.EncodeToString([]byte(c.b)))
+
+	ok, err := client.ClaimCoin(c.b, id)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Printf("coin claim result: %v\n", ok)
 }
